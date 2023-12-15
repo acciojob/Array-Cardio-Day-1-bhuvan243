@@ -29,21 +29,29 @@ const people = [
 // Array.prototype.filter()
 // 1. Filter the list of inventors for those who were born in the 1500's and return the filtered array
 export function myfilter() {
-
+	const inventorsBornIn1500s = inventors.filter((item) => {
+		if (item.year >= 1500 && item.year < 1600){
+			return item;
+		}
+	});
+	return inventorsBornIn1500s;
 }
 
 // Array.prototype.map()
 // 2. Give us an array of the inventor first and last names (i.e. full name)
 // Ex: For the first inventor the full name will be 'Albert Einstein'
 export function map() {
-
+	const fullNames = inventors.map((item) => {
+		return `${item.first} ${item.last}`;
+	});
+	return fullNames;
 }
 
 
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest and return the sorted array
 export function sort() {
-
+	return inventors.sort((a, b) => a.year - b.year);
 }
 
 
@@ -51,18 +59,21 @@ export function sort() {
 // 4. How many years did all the inventors live?
 // Return the total number of years all the inventors lived
 export function reduce() {
-
+	return inventors.reduce((totalYears, obj) => totalYears + (obj.passed - obj.year) ,0);
 }
 
 // 5. Sort the inventors by years lived and return the sorted array
 export function sortbylived() {
-
+	const sortByYearsLived = inventors.sort((a,b) => {
+        return (a.passed - a.year) - (b.passed - b.year);
+    });
+	return sortByYearsLived;
 }
 
 // 6. sort Exercise
 // Sort the people alphabetically by last name and return the sorted array
 export function sortByLastName() {
-
+	return inventors.sort((a,b) => a.last.localeCompare(b.last));
 }
 
 // 7. Reduce Exercise
@@ -71,4 +82,23 @@ const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bik
 
 export function reducedSum() {
     // Return an object containing transports as key and its number of occurances as the key's value
+	 return data.reduce((acc, transport) => {
+        // If the transport is not in the accumulator object, initialize it with a count of 1
+        if (!acc[transport]) {
+          acc[transport] = 1;
+        } else {
+          // If the transport is already in the accumulator, increment its count
+          acc[transport]++;
+        }
+        return acc;
+      }, {});
 }
+
+
+
+
+
+
+
+
+
